@@ -1,0 +1,17 @@
+package com.exam.portal.Repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.stereotype.Repository;
+import com.exam.portal.Model.Exam;
+
+import java.util.List;
+
+@Repository
+@EnableJpaRepositories("com.adv.dao")
+public interface ExamRepository extends JpaRepository<Exam, Long> {
+
+    @Query("SELECT e FROM Exam e WHERE e.organisers.id = ?1")
+    List<Exam> findByOrganiserId(Long organiser_id);
+}
